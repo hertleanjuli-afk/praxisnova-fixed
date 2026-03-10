@@ -2,14 +2,13 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, ArrowRight, Mail, Phone, Calendar } from 'lucide-react'
+import { X, ArrowRight, Mail, Calendar } from 'lucide-react'
 
 export default function HomePage() {
   const [showEmailPopup, setShowEmailPopup] = useState(false)
   const [flippedCard, setFlippedCard] = useState(null)
   const [emailSubmitted, setEmailSubmitted] = useState(false)
 
-  // Show email popup after 10 seconds
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowEmailPopup(true)
@@ -23,10 +22,8 @@ export default function HomePage() {
     const data = {
       name: formData.get('name'),
       email: formData.get('email'),
-      to: 'anjuli.hertle@gmail.com'
+      to: 'info@praxisnovaai.com'
     }
-    
-    // In production, this would send to your backend
     console.log('Email submitted:', data)
     setEmailSubmitted(true)
     setTimeout(() => {
@@ -38,27 +35,27 @@ export default function HomePage() {
   const workshops = [
     {
       id: 1,
-      title: 'KI für Kundenkommunikation & Akquise',
+      title: 'KI fÃ¼r Kundenkommunikation & Akquise',
       trainer: 'Anjuli Hertle',
-      shortText: 'Gewinnen Sie mehr Kunden durch intelligente Automatisierung. Von der ersten Kontaktaufnahme bis zum Vertragsabschluss.',
+      shortText: 'Mehr AbschlÃ¼sse, weniger Aufwand. Ihr Vertriebsteam gewinnt wertvolle Stunden zurÃ¼ck und konzentriert sich auf das Wesentliche: den Abschluss.',
       modules: [
-        'KI-gestützte Lead-Generierung - Finden Sie die richtigen Kunden automatisch',
-        'Automatisierte Erstkommunikation - Antworten Sie schneller, ohne Copy-Paste',
-        'Personalisierte Angebote in Minuten - Nicht Stunden',
-        'Integration in IHRE Systeme - Individuell auf Ihre Software angepasst'
+        'KI-gestÃ¼tzte Lead-Generierung: die richtigen Kunden finden, automatisch',
+        'Automatisierte Erstkommunikation: schneller antworten, ohne Copy-Paste',
+        'Personalisierte Angebote in Minuten statt Stunden',
+        'Integration in Ihre Systeme, individuell angepasst'
       ],
       color: 'from-primary-blue to-primary-blue-light'
     },
     {
       id: 2,
-      title: 'KI für Zeitplanung & Projektmanagement',
+      title: 'KI fÃ¼r Zeitplanung & Projektmanagement',
       trainer: 'Samantha Meyer',
-      shortText: 'Behalten Sie den Überblick, ohne den Überblick zu verlieren. Effiziente Planung für komplexe Projekte.',
+      shortText: 'Weniger Verwaltung, mehr Projektzeit. Ihr Team arbeitet fokussierter und liefert Ergebnisse, die Ihre Marge verbessern.',
       modules: [
-        'Intelligente Zeitplanung - KI plant realistisch, nicht optimistisch',
-        'Ressourcen-Optimierung - Setzen Sie Ihr Team effektiver ein',
-        'Automatische Dokumentation - Vergessen Sie Papierkram',
-        'Integration in IHRE Systeme - Individuell auf Ihre Software angepasst'
+        'Intelligente Zeitplanung: KI plant realistisch, nicht optimistisch',
+        'Ressourcen-Optimierung: Ihr Team effektiver einsetzen',
+        'Automatische Dokumentation: Papierkram entfÃ¤llt komplett',
+        'Integration in Ihre Systeme, individuell angepasst'
       ],
       color: 'from-primary-red to-primary-red-light'
     }
@@ -67,23 +64,45 @@ export default function HomePage() {
   const pricingTiers = [
     {
       name: 'STARTER',
-      price: '6.500',
-      features: ['1 Workshop Ihrer Wahl', '5-10 Teilnehmer', '30 Tage E-Mail Support'],
+      price: '7.900',
+      features: [
+        '1 Workshop Ihrer Wahl',
+        '3 Standard-Module',
+        'bis 10 Teilnehmer',
+        '30 Tage E-Mail Support'
+      ],
       highlighted: false
     },
     {
       name: 'PROFESSIONAL',
-      price: '9.500',
+      price: '11.900',
       badge: 'BELIEBT',
-      features: ['1 Workshop Ihrer Wahl', '11-15 Teilnehmer', '60 Tage Support + 2 Follow-up Calls'],
+      features: [
+        '1 Workshop Ihrer Wahl',
+        '3 Standard-Module',
+        'bis 15 Teilnehmer',
+        '60 Tage Support + 1 Follow-up Call'
+      ],
       highlighted: true
     },
     {
       name: 'VIP',
-      price: '15.000',
-      features: ['Beide Workshops', '10-20 Teilnehmer', '90 Tage WhatsApp Support + Custom'],
+      price: '19.900',
+      features: [
+        '2 Workshops',
+        '3 Standard + 1 Custom-Modul',
+        'bis 20 Teilnehmer',
+        '90 Tage WhatsApp Support + 2 Follow-up Calls'
+      ],
       highlighted: false
     }
+  ]
+
+  const stats = [
+    { value: '70%', label: 'weniger Verwaltungsaufwand ab Monat 1' },
+    { value: '10+ Std.', label: 'pro Woche zurÃ¼ckgewonnen, pro Mitarbeiter' },
+    { value: '6 Wochen', label: 'durchschnittliche Amortisationszeit' },
+    { value: '25%', label: 'mehr AbschlÃ¼sse im ersten Quartal' },
   ]
 
   return (
@@ -120,7 +139,6 @@ export default function HomePage() {
                   <p className="text-primary-gray mb-6">
                     Hinterlassen Sie uns Ihre E-Mail und wir senden Ihnen detaillierte Informationen zu unseren Workshops.
                   </p>
-
                   <form onSubmit={handleEmailSubmit} className="space-y-4">
                     <input
                       type="text"
@@ -146,9 +164,9 @@ export default function HomePage() {
                 </>
               ) : (
                 <div className="text-center py-8">
-                  <div className="text-6xl mb-4">✓</div>
+                  <div className="text-6xl mb-4">â</div>
                   <h3 className="text-2xl font-bold text-primary-blue mb-2">Vielen Dank!</h3>
-                  <p className="text-primary-gray">Wir melden uns in Kürze bei Ihnen.</p>
+                  <p className="text-primary-gray">Wir melden uns in KÃ¼rze bei Ihnen.</p>
                 </div>
               )}
             </motion.div>
@@ -159,7 +177,7 @@ export default function HomePage() {
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-40 border-b border-primary-gray-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <div className="text-2xl font-bold text-primary-blue">PraxisNova</div>
+          <div className="text-2xl font-bold text-primary-blue">PraxisNova AI</div>
           <div className="flex gap-4">
             <button
               onClick={() => setShowEmailPopup(true)}
@@ -168,12 +186,12 @@ export default function HomePage() {
               Mehr Infos
             </button>
             <a
-              href="https://calendly.com"
+              href="https://calendly.com/meyer-samantha-praxisnovaai/30min"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-primary-red hover:bg-primary-red-light text-white px-6 py-2 rounded-lg transition-all font-medium"
             >
-              Termin buchen
+              Kostenlose Beratung buchen
             </a>
           </div>
         </div>
@@ -188,18 +206,18 @@ export default function HomePage() {
             transition={{ duration: 0.6 }}
             className="text-5xl sm:text-6xl lg:text-7xl font-bold text-primary-blue mb-6"
           >
-            Smarter planen.<br />
-            Schneller umsetzen.<br />
+            Weniger Admin.<br />
+            Mehr Umsatz.<br />
             <span className="text-gradient">Mit KI.</span>
           </motion.h1>
-          
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl sm:text-2xl text-primary-gray max-w-3xl mx-auto mb-10"
           >
-            KI-Schulungen für Bauunternehmen, Architekten und Immobilienprofis. Praxisnah, messbar, individuell.
+            KI-Schulungen fÃ¼r Bauunternehmen, Architekten und Immobilienprofis. Ihr Team gewinnt bis zu 10 Stunden pro Woche zurÃ¼ck, die direkt in Akquise und Projektarbeit fliessen.
           </motion.p>
 
           <motion.div
@@ -209,13 +227,13 @@ export default function HomePage() {
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <a
-              href="https://calendly.com"
+              href="https://calendly.com/meyer-samantha-praxisnovaai/30min"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-primary-red hover:bg-primary-red-light text-white px-8 py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-105 inline-flex items-center justify-center gap-2"
             >
               <Calendar size={24} />
-              Kostenlose Bedarfsanalyse buchen
+              Kostenlose Beratung buchen
             </a>
             <button
               onClick={() => document.getElementById('workshops').scrollIntoView({ behavior: 'smooth' })}
@@ -225,6 +243,27 @@ export default function HomePage() {
               <ArrowRight size={20} />
             </button>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Stats Bar */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-primary-blue">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {stats.map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="text-center"
+              >
+                <div className="text-3xl sm:text-4xl font-bold text-white mb-2">{stat.value}</div>
+                <div className="text-sm text-white/75">{stat.label}</div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -239,34 +278,42 @@ export default function HomePage() {
           >
             Kennen Sie das?
           </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-xl text-center text-primary-gray mb-12 max-w-2xl mx-auto"
+          >
+            Wertvolle Arbeitszeit, die in Verwaltung statt in Wachstum fliesst.
+          </motion.p>
 
-          <div className="grid md:grid-cols-3 gap-8 mt-12">
+          <div className="grid md:grid-cols-3 gap-8 mt-4">
             {[
               {
-                icon: '🏗️',
+                icon: 'ðï¸',
                 title: 'BAUUNTERNEHMEN',
                 problems: [
-                  'Angebotserstellung dauert Stunden statt Minuten',
-                  'Projektdokumentation ist zeitaufwändig',
-                  'Kommunikation mit Subunternehmern ineffizient'
+                  'Angebotserstellung kostet Stunden statt Minuten',
+                  'Projektdokumentation bindet FachkrÃ¤fte unnÃ¶tig',
+                  'Kommunikation mit Subunternehmern frisst Zeit, die auf der Baustelle fehlt'
                 ]
               },
               {
-                icon: '📐',
+                icon: 'ð',
                 title: 'ARCHITEKTEN',
                 problems: [
-                  'Zeitplanung wird schnell chaotisch',
-                  'Kundenkommunikation frisst wertvolle Zeit',
-                  'Administrative Aufgaben statt kreative Arbeit'
+                  'Administrative Aufgaben verdrÃ¤ngen kreative Arbeit',
+                  'Kundenkommunikation lÃ¤uft ineffizient und zeitaufwÃ¤ndig',
+                  'Ausschreibungen und Berichte werden manuell statt automatisiert erstellt'
                 ]
               },
               {
-                icon: '🏢',
+                icon: 'ð¢',
                 title: 'IMMOBILIENPROFIS',
                 problems: [
-                  'Lead-Generierung kostet zu viel Zeit',
-                  'Exposé-Erstellung ist repetitiv',
-                  'Kundenbetreuung lässt sich schwer skalieren'
+                  'Lead-Generierung und Nachverfolgung kostet zu viel Zeit',
+                  'ExposÃ©-Erstellung ist repetitiv und skaliert nicht',
+                  'Kundenbetreuung lÃ¤sst sich ohne KI kaum ausbauen'
                 ]
               }
             ].map((audience, index) => (
@@ -283,7 +330,7 @@ export default function HomePage() {
                 <ul className="space-y-3">
                   {audience.problems.map((problem, i) => (
                     <li key={i} className="flex items-start gap-2 text-primary-gray">
-                      <span className="text-primary-red mt-1">•</span>
+                      <span className="text-primary-red mt-1">â</span>
                       <span>{problem}</span>
                     </li>
                   ))}
@@ -294,8 +341,48 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Solution Bridge */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-primary-gray-light">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl sm:text-4xl font-bold text-primary-blue mb-6"
+          >
+            Was mÃ¶glich ist, wenn Admin wegfÃ¤llt
+          </motion.h2>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="grid sm:grid-cols-3 gap-6 mt-8"
+          >
+            {[
+              { icon: 'ð¯', title: 'Fokus auf AbschlÃ¼sse', text: 'Ihr Vertrieb verbringt Zeit mit Kunden, nicht mit Verwaltung. Mehr GesprÃ¤che, mehr Umsatz.' },
+              { icon: 'â¡', title: 'Schnellere Projektabwicklung', text: 'Dokumentation, Berichte und Kommunikation laufen automatisiert. Ihr Team liefert schneller.' },
+              { icon: 'ð', title: 'Skalierbare Prozesse', text: 'Wachstum ohne proportional mehr Personal. KI Ã¼bernimmt die Arbeit, die nicht skaliert.' },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="bg-white rounded-xl p-6 shadow-sm"
+              >
+                <div className="text-4xl mb-3">{item.icon}</div>
+                <h3 className="font-bold text-primary-blue mb-2">{item.title}</h3>
+                <p className="text-sm text-primary-gray">{item.text}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
       {/* Workshops Section */}
-      <section id="workshops" className="py-20 px-4 sm:px-6 lg:px-8 bg-primary-gray-light">
+      <section id="workshops" className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
@@ -307,7 +394,7 @@ export default function HomePage() {
               Zwei Workshops. Maximale Wirkung.
             </h2>
             <p className="text-xl text-primary-gray max-w-2xl mx-auto">
-              Individuell angepasst an Ihre Systeme und Prozesse
+              Individuell angepasst an Ihre Systeme und Prozesse. HalbtÃ¤gig. Sofort umsetzbar.
             </p>
           </motion.div>
 
@@ -329,9 +416,8 @@ export default function HomePage() {
                   className="relative w-full h-full"
                   style={{ transformStyle: 'preserve-3d' }}
                 >
-                  {/* Front of card */}
                   <div
-                    className="absolute w-full h-full rounded-2xl p-8 flex flex-col justify-between bg-gradient-to-br text-white shadow-xl"
+                    className="absolute w-full h-full rounded-2xl p-8 flex flex-col justify-between text-white shadow-xl"
                     style={{
                       backfaceVisibility: 'hidden',
                       background: `linear-gradient(135deg, ${workshop.id === 1 ? '#1565C0' : '#D32F2F'} 0%, ${workshop.id === 1 ? '#42A5F5' : '#EF5350'} 100%)`
@@ -343,11 +429,10 @@ export default function HomePage() {
                       <p className="text-lg">{workshop.shortText}</p>
                     </div>
                     <div className="text-sm text-white/75 text-center">
-                      Klicken für Details →
+                      Klicken fÃ¸r Details
                     </div>
                   </div>
 
-                  {/* Back of card */}
                   <div
                     className="absolute w-full h-full bg-white rounded-2xl p-8 shadow-xl border-2 border-primary-gray-light"
                     style={{
@@ -369,7 +454,7 @@ export default function HomePage() {
                       ))}
                     </ul>
                     <div className="mt-6 text-sm text-primary-gray text-center">
-                      ← Zurück
+                      ZurÃ¼ck
                     </div>
                   </div>
                 </motion.div>
@@ -380,7 +465,7 @@ export default function HomePage() {
       </section>
 
       {/* Pricing Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-primary-gray-light">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
@@ -389,7 +474,8 @@ export default function HomePage() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl font-bold text-primary-blue mb-4">Investition</h2>
-            <p className="text-xl text-primary-gray">Wählen Sie das passende Paket für Ihr Team</p>
+            <p className="text-xl text-primary-gray">WÃ¤hlen Sie das passende Paket fÃ¼r Ihr Team</p>
+            <p className="text-primary-gray mt-2">Amortisiert sich im Schnitt innerhalb von 6 Wochen.</p>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -402,7 +488,7 @@ export default function HomePage() {
                 transition={{ delay: index * 0.1 }}
                 className={`relative rounded-2xl p-8 ${
                   tier.highlighted
-                    ? 'border-4 border-primary-blue bg-primary-gray-light shadow-2xl scale-105'
+                    ? 'border-4 border-primary-blue bg-white shadow-2xl scale-105'
                     : 'border-2 border-primary-gray-light bg-white'
                 }`}
               >
@@ -413,26 +499,28 @@ export default function HomePage() {
                 )}
                 <h3 className="text-2xl font-bold text-primary-blue text-center mb-4">{tier.name}</h3>
                 <div className="text-center mb-6">
-                  <span className="text-5xl font-bold text-primary-blue">€{tier.price}</span>
+                  <span className="text-5xl font-bold text-primary-blue">â¬{tier.price}</span>
                 </div>
                 <ul className="space-y-4 mb-8">
                   {tier.features.map((feature, i) => (
                     <li key={i} className="flex items-start gap-2 text-primary-gray">
-                      <span className="text-primary-blue mt-1">✓</span>
+                      <span className="text-primary-blue mt-1">â</span>
                       <span>{feature}</span>
                     </li>
                   ))}
                 </ul>
-                <button
-                  onClick={() => setShowEmailPopup(true)}
-                  className={`w-full py-3 px-6 rounded-lg font-bold transition-all transform hover:scale-105 ${
+                <a
+                  href="https://calendly.com/meyer-samantha-praxisnovaai/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`block w-full py-3 px-6 rounded-lg font-bold transition-all transform hover:scale-105 text-center ${
                     tier.highlighted
                       ? 'bg-primary-red text-white hover:bg-primary-red-light'
                       : 'bg-primary-blue text-white hover:bg-primary-blue-light'
                   }`}
                 >
-                  Jetzt anfragen
-                </button>
+                  Jetzt Beratung buchen
+                </a>
               </motion.div>
             ))}
           </div>
@@ -440,7 +528,7 @@ export default function HomePage() {
       </section>
 
       {/* Team Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-primary-gray-light">
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
@@ -456,15 +544,13 @@ export default function HomePage() {
             {[
               {
                 name: 'Anjuli Hertle',
-                role: 'Expertin für Kundenkommunikation & Akquise',
-                bio: 'Mit jahrelanger Erfahrung im Vertrieb weiß Anjuli, wie man Kunden gewinnt und bindet. Sie zeigt Ihnen, wie KI Ihre Akquise revolutioniert - ohne dass Sie Ihre persönliche Note verlieren.',
-                image: 'IMG_0426.jpg'
+                role: 'Expertin fÃ¼r Kundenkommunikation & Akquise',
+                bio: 'Mit jahrelanger Erfahrung im Vertrieb weiss Anjuli, wie man Kunden gewinnt und bindet. Sie zeigt Ihrem Team, wie KI die Akquise beschleunigt, ohne die persÃ¶nliche Note zu verlieren.'
               },
               {
                 name: 'Samantha Meyer',
-                role: 'Spezialistin für Zeitplanung & Projektmanagement',
-                bio: 'Samantha bringt Ordnung ins Chaos. Mit ihrer Expertise in Projektmanagement hilft sie Ihnen, KI sinnvoll in Ihre Arbeitsabläufe zu integrieren - für messbare Effizienzgewinne.',
-                image: '2CB70EF8-1A2C-469E-997C-7BF315C80222.JPG'
+                role: 'Spezialistin fÃ¼r Zeitplanung & Projektmanagement',
+                bio: 'Samantha bringt Ordnung in komplexe AblÃ¤ufe. Mit ihrer Expertise im Projektmanagement hilft sie Ihnen, KI sinnvoll in Ihre Workflows zu integrieren, sodass messbar mehr Projektzeit entsteht.'
               }
             ].map((person, index) => (
               <motion.div
@@ -472,7 +558,7 @@ export default function HomePage() {
                 initial={{ opacity: 0, x: index === 0 ? -20 : 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="bg-white rounded-2xl p-8 shadow-lg"
+                className="bg-white rounded-2xl p-8 shadow-lg border border-primary-gray-light"
               >
                 <div className="mb-6">
                   <h3 className="text-2xl font-bold text-primary-blue mb-2">{person.name}</h3>
@@ -494,16 +580,25 @@ export default function HomePage() {
             viewport={{ once: true }}
             className="text-4xl font-bold mb-6"
           >
-            Bereit für den nächsten Schritt?
+            Bereit fÃ¸r den nÃ¤chsten Schritt?
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-xl mb-8 opacity-90"
+            className="text-xl mb-4 opacity-90"
           >
-            Buchen Sie jetzt eine kostenlose 15-minütige Bedarfsanalyse. Wir besprechen Ihre Herausforderungen und zeigen Ihnen, wie KI Ihrem Unternehmen konkret helfen kann.
+            Buchen Sie jetzt eine kostenlose 15-minÃ¼tige Beratung. Wir zeigen Ihnen konkret, wie viele Stunden Ihr Team wÃ¶chentlich zurÃ¼ckgewinnen kann und was das fÃ¼r Ihren Umsatz bedeutet.
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.15 }}
+            className="text-lg mb-8 opacity-75"
+          >
+            Kein IT-Aufwand. Sofort umsetzbar. Amortisiert sich in 6 Wochen.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -513,13 +608,13 @@ export default function HomePage() {
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <a
-              href="https://calendly.com"
+              href="https://calendly.com/meyer-samantha-praxisnovaai/30min"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-white text-primary-blue px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary-gray-light transition-all transform hover:scale-105 inline-flex items-center justify-center gap-2"
             >
               <Calendar size={24} />
-              Jetzt Termin vereinbaren
+              Jetzt Beratung buchen
             </a>
           </motion.div>
         </div>
@@ -530,32 +625,28 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8">
             <div>
-              <h3 className="text-2xl font-bold mb-4">PraxisNova</h3>
-              <p className="opacity-75">KI-Schulungen für Bau & Immobilien</p>
+              <h3 className="text-2xl font-bold mb-4">PraxisNova AI</h3>
+              <p className="opacity-75">KI-Schulungen fÃ¼r Bau und Immobilien</p>
             </div>
             <div>
               <h4 className="font-bold mb-4">Kontakt</h4>
               <div className="space-y-2 opacity-75">
                 <p className="flex items-center gap-2">
-                  <Phone size={16} />
-                  0176/6660906
-                </p>
-                <p className="flex items-center gap-2">
                   <Mail size={16} />
-                  anjuli.hertle@gmail.com
+                  info@praxisnovaai.com
                 </p>
               </div>
             </div>
             <div>
               <h4 className="font-bold mb-4">Rechtliches</h4>
               <div className="space-y-2 opacity-75">
-                <p>Impressum folgt</p>
-                <p>Datenschutz folgt</p>
+                <a href="/impressum" className="block hover:opacity-100">Impressum</a>
+                <a href="/datenschutz" className="block hover:orogcity-100">Datenschutz</a>
               </div>
             </div>
           </div>
           <div className="border-t border-white/20 mt-8 pt-8 text-center opacity-75">
-            <p>© 2026 PraxisNova. Alle Rechte vorbehalten.</p>
+            <p>Â© 2026 PraxisNova AI. Alle Rechte vorbehalten.</p>
           </div>
         </div>
       </footer>
