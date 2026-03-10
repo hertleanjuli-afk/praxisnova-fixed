@@ -4,10 +4,17 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, ArrowRight, Mail, Calendar } from 'lucide-react'
 
+// HubSpot config â Portal-ID eintragen (zu finden unter HubSpot > Einstellungen > Konto-Einrichtung)
+const HUBSPOT_PORTAL_ID = '147989409'
+const HUBSPOT_FORM_ID = '4ec76e7c-f7b3-4144-8d9d-8e7f42f8db3d'
+
 export default function HomePage() {
   const [showEmailPopup, setShowEmailPopup] = useState(false)
   const [flippedCard, setFlippedCard] = useState(null)
   const [emailSubmitted, setEmailSubmitted] = useState(false)
+  const [emailLoading, setEmailLoading] = useState(false)
+  const [emailError, setEmailError] = useState(null)
+  const [showCalendly, setShowCalendly] = useState(false)
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -16,20 +23,72 @@ export default function HomePage() {
     return () => clearTimeout(timer)
   }, [])
 
+  // Calendly Widget Script laden
+  useEffect(() => {
+    const link = document.createElement('link')
+    link.href = 'https://assets.calendly.com/assets/external/widget.css'
+    link.rel = 'stylesheet'
+    document.head.appendChild(link)
+    const script = document.createElement('script')
+    script.src = 'https://assets.calendly.com/assets/external/widget.js'
+    script.async = true
+    document.head.appendChild(script)
+    return () => {
+      document.head.removeChild(link)
+      document.head.removeChild(script)
+    }
+  }, [])
+
+  const openCalendly = (e) => {
+    e.preventDefault()
+    if (window.Calendly) {
+      window.Calendly.initPopupWidget({
+        url: 'https://calendly.com/meyer-samantha-praxisnovaai/30min'
+      })
+    } else {
+      window.open('https://calendly.com/meyer-samantha-praxisnovaai/30min', '_blank')
+    }
+  }
+
   const handleEmailSubmit = async (e) => {
     e.preventDefault()
+    setEmailLoading(true)
+    setEmailError(null)
     const formData = new FormData(e.target)
-    const data = {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      to: 'info@praxisnovaai.com'
+    const firstName = formData.get('name').split(' ')[0]
+    const lastName = formData.get('name').split(' ').slice(1).join(' ') || ''
+    const email = formData.get('email')
+
+    try {
+      const res = await fetch(
+        `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_ID}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            fields: [
+              { name: 'firstname', value: firstName },
+              { name: 'lastname', value: lastName },
+              { name: 'email', value: email },
+            ],
+            context: {
+              pageUri: window.location.href,
+              pageName: 'PraxisNova AI â Startseite'
+            }
+          })
+        }
+      )
+      if (!res.ok) throw new Error('Submission failed')
+      setEmailSubmitted(true)
+      setTimeout(() => {
+        setShowEmailPopup(false)
+        setEmailSubmitted(false)
+      }, 3000)
+    } catch (err) {
+      setEmailError('Es gab einen Fehler. Bitte versuchen Sie es erneut.')
+    } finally {
+      setEmailLoading(false)
     }
-    console.log('Email submitted:', data)
-    setEmailSubmitted(true)
-    setTimeout(() => {
-      setShowEmailPopup(false)
-      setEmailSubmitted(false)
-    }, 2000)
   }
 
   const workshops = [
@@ -145,20 +204,26 @@ export default function HomePage() {
                       name="name"
                       placeholder="Ihr Name"
                       required
-                      className="w-full px-4 py-3 border-2 border-primary-gray-light rounded-lg focus:border-primary-blue focus:outline-none transition-colors"
+                      disabled={emailLoading}
+                      className="w-full px-4 py-3 border-2 border-primary-gray-light rounded-lg focus:border-primary-blue focus:outline-none transition-colors disabled:opacity-50"
                     />
                     <input
                       type="email"
                       name="email"
                       placeholder="Ihre E-Mail"
                       required
-                      className="w-full px-4 py-3 border-2 border-primary-gray-light rounded-lg focus:border-primary-blue focus:outline-none transition-colors"
+                      disabled={emailLoading}
+                      className="w-full px-4 py-3 border-2 border-primary-gray-light rounded-lg focus:border-primary-blue focus:outline-none transition-colors disabled:opacity-50"
                     />
+                    {emailError && (
+                      <p className="text-red-500 text-sm">{emailError}</p>
+                    )}
                     <button
                       type="submit"
-                      className="w-full bg-primary-red hover:bg-primary-red-light text-white font-bold py-3 px-6 rounded-lg transition-all transform hover:scale-105"
+                      disabled={emailLoading}
+                      className="w-full bg-primary-red hover:bg-primary-red-light text-white font-bold py-3 px-6 rounded-lg transition-all transform hover:scale-105 disabled:opacity-60 disabled:cursor-not-allowed"
                     >
-                      Infos anfordern
+                      {emailLoading ? 'Wird gesendet...' : 'Infos anfordern'}
                     </button>
                   </form>
                 </>
@@ -166,7 +231,7 @@ export default function HomePage() {
                 <div className="text-center py-8">
                   <div className="text-6xl mb-4">â</div>
                   <h3 className="text-2xl font-bold text-primary-blue mb-2">Vielen Dank!</h3>
-                  <p className="text-primary-gray">Wir melden uns in KÃ¼rze bei Ihnen.</p>
+                  <p className="text-primary-gray">Wir haben Ihre Anfrage erhalten und melden uns in KÃ¼rze.</p>
                 </div>
               )}
             </motion.div>
@@ -185,14 +250,12 @@ export default function HomePage() {
             >
               Mehr Infos
             </button>
-            <a
-              href="https://calendly.com/meyer-samantha-praxisnovaai/30min"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={openCalendly}
               className="bg-primary-red hover:bg-primary-red-light text-white px-6 py-2 rounded-lg transition-all font-medium"
             >
               Kostenlose Beratung buchen
-            </a>
+            </button>
           </div>
         </div>
       </nav>
@@ -226,15 +289,13 @@ export default function HomePage() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <a
-              href="https://calendly.com/meyer-samantha-praxisnovaai/30min"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={openCalendly}
               className="bg-primary-red hover:bg-primary-red-light text-white px-8 py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-105 inline-flex items-center justify-center gap-2"
             >
               <Calendar size={24} />
               Kostenlose Beratung buchen
-            </a>
+            </button>
             <button
               onClick={() => document.getElementById('workshops').scrollIntoView({ behavior: 'smooth' })}
               className="border-2 border-primary-blue text-primary-blue hover:bg-primary-blue hover:text-white px-8 py-4 rounded-lg font-bold text-lg transition-all inline-flex items-center justify-center gap-2"
@@ -360,7 +421,7 @@ export default function HomePage() {
             className="grid sm:grid-cols-3 gap-6 mt-8"
           >
             {[
-              { icon: 'ð¯', title: 'Fokus auf AbschlÃ¼sse', text: 'Ihr Vertrieb verbringt Zeit mit Kunden, nicht mit Verwaltung. Mehr GesprÃ¤che, mehr Umsatz.' },
+              { icon: 'ð¯', title: 'Fokus auf AbschlÃ¸sse', text: 'Ihr Vertrieb verbringt Zeit mit Kunden, nicht mit Verwaltung. Mehr GesprÃ¤che, mehr Umsatz.' },
               { icon: 'â¡', title: 'Schnellere Projektabwicklung', text: 'Dokumentation, Berichte und Kommunikation laufen automatisiert. Ihr Team liefert schneller.' },
               { icon: 'ð', title: 'Skalierbare Prozesse', text: 'Wachstum ohne proportional mehr Personal. KI Ã¼bernimmt die Arbeit, die nicht skaliert.' },
             ].map((item, i) => (
@@ -474,7 +535,7 @@ export default function HomePage() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl font-bold text-primary-blue mb-4">Investition</h2>
-            <p className="text-xl text-primary-gray">WÃ¤hlen Sie das passende Paket fÃ¼r Ihr Team</p>
+            <p className="text-xl text-primary-gray">WÃ¤hlen Sie das passende Paket fÃ¸r Ihr Team</p>
             <p className="text-primary-gray mt-2">Amortisiert sich im Schnitt innerhalb von 6 Wochen.</p>
           </motion.div>
 
@@ -509,10 +570,8 @@ export default function HomePage() {
                     </li>
                   ))}
                 </ul>
-                <a
-                  href="https://calendly.com/meyer-samantha-praxisnovaai/30min"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  onClick={openCalendly}
                   className={`block w-full py-3 px-6 rounded-lg font-bold transition-all transform hover:scale-105 text-center ${
                     tier.highlighted
                       ? 'bg-primary-red text-white hover:bg-primary-red-light'
@@ -520,7 +579,7 @@ export default function HomePage() {
                   }`}
                 >
                   Jetzt Beratung buchen
-                </a>
+                </button>
               </motion.div>
             ))}
           </div>
@@ -544,12 +603,12 @@ export default function HomePage() {
             {[
               {
                 name: 'Anjuli Hertle',
-                role: 'Expertin fÃ¼r Kundenkommunikation & Akquise',
+                role: 'Expertin fÃ¸r Kundenkommunikation & Akquise',
                 bio: 'Mit jahrelanger Erfahrung im Vertrieb weiss Anjuli, wie man Kunden gewinnt und bindet. Sie zeigt Ihrem Team, wie KI die Akquise beschleunigt, ohne die persÃ¶nliche Note zu verlieren.'
               },
               {
                 name: 'Samantha Meyer',
-                role: 'Spezialistin fÃ¼r Zeitplanung & Projektmanagement',
+                role: 'Spezialistin fÃ¸r Zeitplanung & Projektmanagement',
                 bio: 'Samantha bringt Ordnung in komplexe AblÃ¤ufe. Mit ihrer Expertise im Projektmanagement hilft sie Ihnen, KI sinnvoll in Ihre Workflows zu integrieren, sodass messbar mehr Projektzeit entsteht.'
               }
             ].map((person, index) => (
@@ -589,7 +648,7 @@ export default function HomePage() {
             transition={{ delay: 0.1 }}
             className="text-xl mb-4 opacity-90"
           >
-            Buchen Sie jetzt eine kostenlose 15-minÃ¼tige Beratung. Wir zeigen Ihnen konkret, wie viele Stunden Ihr Team wÃ¶chentlich zurÃ¼ckgewinnen kann und was das fÃ¼r Ihren Umsatz bedeutet.
+            Buchen Sie jetzt eine kostenlose 15-minÃ¸tige Beratung. Wir zeigen Ihnen konkret, wie viele Stunden Ihr Team wÃ¶chentlich zurÃ¼ckgewinnen kann und was das fÃ¸r Ihren Umsatz bedeutet.
           </motion.p>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -607,15 +666,13 @@ export default function HomePage() {
             transition={{ delay: 0.2 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <a
-              href="https://calendly.com/meyer-samantha-praxisnovaai/30min"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={openCalendly}
               className="bg-white text-primary-blue px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary-gray-light transition-all transform hover:scale-105 inline-flex items-center justify-center gap-2"
             >
               <Calendar size={24} />
               Jetzt Beratung buchen
-            </a>
+            </button>
           </motion.div>
         </div>
       </section>
@@ -626,7 +683,7 @@ export default function HomePage() {
           <div className="grid md:grid-cols-3 gap-8">
             <div>
               <h3 className="text-2xl font-bold mb-4">PraxisNova AI</h3>
-              <p className="opacity-75">KI-Schulungen fÃ¼r Bau und Immobilien</p>
+              <p className="opacity-75">KI-Schulungen fÃ¸r Bau und Immobilien</p>
             </div>
             <div>
               <h4 className="font-bold mb-4">Kontakt</h4>
@@ -640,8 +697,8 @@ export default function HomePage() {
             <div>
               <h4 className="font-bold mb-4">Rechtliches</h4>
               <div className="space-y-2 opacity-75">
-                <a href="/impressum" className="block hover:opacity-100">Impressum</a>
-                <a href="/datenschutz" className="block hover:orogcity-100">Datenschutz</a>
+                <p>Impressum</p>
+                <p>Datenschutz</p>
               </div>
             </div>
           </div>
