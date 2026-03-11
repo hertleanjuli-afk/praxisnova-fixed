@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, ArrowRight, Mail, Calendar } from 'lucide-react'
 
-// HubSpot config â Portal-ID eintragen (zu finden unter HubSpot > Einstellungen > Konto-Einrichtung)
+// HubSpot config — Portal-ID eintragen (zu finden unter HubSpot > Einstellungen > Konto-Einrichtung)
 const HUBSPOT_PORTAL_ID = '147989409'
 const HUBSPOT_FORM_ID = '4ec76e7c-f7b3-4144-8d9d-8e7f42f8db3d'
 
@@ -73,7 +73,7 @@ export default function HomePage() {
             ],
             context: {
               pageUri: window.location.href,
-              pageName: 'PraxisNova AI â Startseite'
+              pageName: 'PraxisNova AI – Startseite'
             }
           })
         }
@@ -94,11 +94,11 @@ export default function HomePage() {
   const workshops = [
     {
       id: 1,
-      title: 'KI fÃ¼r Kundenkommunikation & Akquise',
+      title: 'KI für Kundenkommunikation & Akquise',
       trainer: 'Anjuli Hertle',
-      shortText: 'Mehr AbschlÃ¼sse, weniger Aufwand. Ihr Vertriebsteam gewinnt wertvolle Stunden zurÃ¼ck und konzentriert sich auf das Wesentliche: den Abschluss.',
+      shortText: 'Mehr Abschlüsse, weniger Aufwand. Ihr Vertriebsteam gewinnt wertvolle Stunden zurück und konzentriert sich auf das Wesentliche: den Abschluss.',
       modules: [
-        'KI-gestÃ¼tzte Lead-Generierung: die richtigen Kunden finden, automatisch',
+        'KI-gestützte Lead-Generierung: die richtigen Kunden finden, automatisch',
         'Automatisierte Erstkommunikation: schneller antworten, ohne Copy-Paste',
         'Personalisierte Angebote in Minuten statt Stunden',
         'Integration in Ihre Systeme, individuell angepasst'
@@ -107,13 +107,13 @@ export default function HomePage() {
     },
     {
       id: 2,
-      title: 'KI fÃ¼r Zeitplanung & Projektmanagement',
+      title: 'KI für Zeitplanung & Projektmanagement',
       trainer: 'Samantha Meyer',
       shortText: 'Weniger Verwaltung, mehr Projektzeit. Ihr Team arbeitet fokussierter und liefert Ergebnisse, die Ihre Marge verbessern.',
       modules: [
         'Intelligente Zeitplanung: KI plant realistisch, nicht optimistisch',
         'Ressourcen-Optimierung: Ihr Team effektiver einsetzen',
-        'Automatische Dokumentation: Papierkram entfÃ¤llt komplett',
+        'Automatische Dokumentation: Papierkram entfällt komplett',
         'Integration in Ihre Systeme, individuell angepasst'
       ],
       color: 'from-primary-red to-primary-red-light'
@@ -140,7 +140,7 @@ export default function HomePage() {
         '1 Workshop Ihrer Wahl',
         '3 Standard-Module',
         'bis 15 Teilnehmer',
-        '60 Tage Support + 1 Follow-up Call'
+        '30 Tage E-Mail Support'
       ],
       highlighted: true
     },
@@ -151,7 +151,7 @@ export default function HomePage() {
         '2 Workshops',
         '3 Standard + 1 Custom-Modul',
         'bis 20 Teilnehmer',
-        '90 Tage WhatsApp Support + 2 Follow-up Calls'
+        '60 Tage E-Mail Support + 2 Calls'
       ],
       highlighted: false
     }
@@ -159,9 +159,9 @@ export default function HomePage() {
 
   const stats = [
     { value: '70%', label: 'weniger Verwaltungsaufwand ab Monat 1' },
-    { value: '10+ Std.', label: 'pro Woche zurÃ¼ckgewonnen, pro Mitarbeiter' },
+    { value: '10+ Std.', label: 'pro Woche zurückgewonnen, pro Mitarbeiter' },
     { value: '6 Wochen', label: 'durchschnittliche Amortisationszeit' },
-    { value: '25%', label: 'mehr AbschlÃ¼sse im ersten Quartal' },
+    { value: '25%', label: 'mehr Abschlüsse im ersten Quartal' },
   ]
 
   return (
@@ -229,9 +229,9 @@ export default function HomePage() {
                 </>
               ) : (
                 <div className="text-center py-8">
-                  <div className="text-6xl mb-4">â</div>
+                  <div className="text-6xl mb-4">✓</div>
                   <h3 className="text-2xl font-bold text-primary-blue mb-2">Vielen Dank!</h3>
-                  <p className="text-primary-gray">Wir haben Ihre Anfrage erhalten und melden uns in KÃ¼rze.</p>
+                  <p className="text-primary-gray">Wir haben Ihre Anfrage erhalten und melden uns in Kürze.</p>
                 </div>
               )}
             </motion.div>
@@ -280,7 +280,7 @@ export default function HomePage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl sm:text-2xl text-primary-gray max-w-3xl mx-auto mb-10"
           >
-            KI-Schulungen fÃ¼r Bauunternehmen, Architekten und Immobilienprofis. Ihr Team gewinnt bis zu 10 Stunden pro Woche zurÃ¼ck, die direkt in Akquise und Projektarbeit fliessen.
+            KI-Schulungen für Bauunternehmen, Architekten und Immobilienprofis. Ihr Team gewinnt bis zu 10 Stunden pro Woche zurück, die direkt in Akquise und Projektarbeit fliessen.
           </motion.p>
 
           <motion.div
@@ -351,30 +351,30 @@ export default function HomePage() {
           <div className="grid md:grid-cols-3 gap-8 mt-4">
             {[
               {
-                icon: 'ðï¸',
+                icon: '🏗️',
                 title: 'BAUUNTERNEHMEN',
                 problems: [
                   'Angebotserstellung kostet Stunden statt Minuten',
-                  'Projektdokumentation bindet FachkrÃ¤fte unnÃ¶tig',
+                  'Projektdokumentation bindet Fachkräfte unnötig',
                   'Kommunikation mit Subunternehmern frisst Zeit, die auf der Baustelle fehlt'
                 ]
               },
               {
-                icon: 'ð',
+                icon: '📐',
                 title: 'ARCHITEKTEN',
                 problems: [
-                  'Administrative Aufgaben verdrÃ¤ngen kreative Arbeit',
-                  'Kundenkommunikation lÃ¤uft ineffizient und zeitaufwÃ¤ndig',
+                  'Administrative Aufgaben verdrängen kreative Arbeit',
+                  'Kundenkommunikation läuft ineffizient und zeitaufwändig',
                   'Ausschreibungen und Berichte werden manuell statt automatisiert erstellt'
                 ]
               },
               {
-                icon: 'ð¢',
+                icon: '🏢',
                 title: 'IMMOBILIENPROFIS',
                 problems: [
                   'Lead-Generierung und Nachverfolgung kostet zu viel Zeit',
-                  'ExposÃ©-Erstellung ist repetitiv und skaliert nicht',
-                  'Kundenbetreuung lÃ¤sst sich ohne KI kaum ausbauen'
+                  'Exposé-Erstellung ist repetitiv und skaliert nicht',
+                  'Kundenbetreuung lässt sich ohne KI kaum ausbauen'
                 ]
               }
             ].map((audience, index) => (
@@ -391,7 +391,7 @@ export default function HomePage() {
                 <ul className="space-y-3">
                   {audience.problems.map((problem, i) => (
                     <li key={i} className="flex items-start gap-2 text-primary-gray">
-                      <span className="text-primary-red mt-1">â</span>
+                      <span className="text-primary-red mt-1">✕</span>
                       <span>{problem}</span>
                     </li>
                   ))}
@@ -411,7 +411,7 @@ export default function HomePage() {
             viewport={{ once: true }}
             className="text-3xl sm:text-4xl font-bold text-primary-blue mb-6"
           >
-            Was mÃ¶glich ist, wenn Admin wegfÃ¤llt
+            Was möglich ist, wenn Admin wegfällt
           </motion.h2>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -421,9 +421,9 @@ export default function HomePage() {
             className="grid sm:grid-cols-3 gap-6 mt-8"
           >
             {[
-              { icon: 'ð¯', title: 'Fokus auf AbschlÃ¸sse', text: 'Ihr Vertrieb verbringt Zeit mit Kunden, nicht mit Verwaltung. Mehr GesprÃ¤che, mehr Umsatz.' },
-              { icon: 'â¡', title: 'Schnellere Projektabwicklung', text: 'Dokumentation, Berichte und Kommunikation laufen automatisiert. Ihr Team liefert schneller.' },
-              { icon: 'ð', title: 'Skalierbare Prozesse', text: 'Wachstum ohne proportional mehr Personal. KI Ã¼bernimmt die Arbeit, die nicht skaliert.' },
+              { icon: '🎯', title: 'Fokus auf Abschlüsse', text: 'Ihr Vertrieb verbringt Zeit mit Kunden, nicht mit Verwaltung. Mehr Gespräche, mehr Umsatz.' },
+              { icon: '⚡', title: 'Schnellere Projektabwicklung', text: 'Dokumentation, Berichte und Kommunikation laufen automatisiert. Ihr Team liefert schneller.' },
+              { icon: '📈', title: 'Skalierbare Prozesse', text: 'Wachstum ohne proportional mehr Personal. KI übernimmt die Arbeit, die nicht skaliert.' },
             ].map((item, i) => (
               <motion.div
                 key={i}
@@ -455,7 +455,7 @@ export default function HomePage() {
               Zwei Workshops. Maximale Wirkung.
             </h2>
             <p className="text-xl text-primary-gray max-w-2xl mx-auto">
-              Individuell angepasst an Ihre Systeme und Prozesse. HalbtÃ¤gig. Sofort umsetzbar.
+              Individuell angepasst an Ihre Systeme und Prozesse. Halbtägig. Sofort umsetzbar.
             </p>
           </motion.div>
 
@@ -490,7 +490,7 @@ export default function HomePage() {
                       <p className="text-lg">{workshop.shortText}</p>
                     </div>
                     <div className="text-sm text-white/75 text-center">
-                      Klicken fÃ¸r Details
+                      Klicken für Details
                     </div>
                   </div>
 
@@ -515,7 +515,7 @@ export default function HomePage() {
                       ))}
                     </ul>
                     <div className="mt-6 text-sm text-primary-gray text-center">
-                      ZurÃ¼ck
+                      Zurück
                     </div>
                   </div>
                 </motion.div>
@@ -535,7 +535,7 @@ export default function HomePage() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl font-bold text-primary-blue mb-4">Investition</h2>
-            <p className="text-xl text-primary-gray">WÃ¤hlen Sie das passende Paket fÃ¸r Ihr Team</p>
+            <p className="text-xl text-primary-gray">Wählen Sie das passende Paket für Ihr Team</p>
             <p className="text-primary-gray mt-2">Amortisiert sich im Schnitt innerhalb von 6 Wochen.</p>
           </motion.div>
 
@@ -560,12 +560,12 @@ export default function HomePage() {
                 )}
                 <h3 className="text-2xl font-bold text-primary-blue text-center mb-4">{tier.name}</h3>
                 <div className="text-center mb-6">
-                  <span className="text-5xl font-bold text-primary-blue">â¬{tier.price}</span>
+                  <span className="text-5xl font-bold text-primary-blue">€{tier.price}</span>
                 </div>
                 <ul className="space-y-4 mb-8">
                   {tier.features.map((feature, i) => (
                     <li key={i} className="flex items-start gap-2 text-primary-gray">
-                      <span className="text-primary-blue mt-1">â</span>
+                      <span className="text-primary-blue mt-1">✓</span>
                       <span>{feature}</span>
                     </li>
                   ))}
@@ -603,13 +603,15 @@ export default function HomePage() {
             {[
               {
                 name: 'Anjuli Hertle',
-                role: 'Expertin fÃ¸r Kundenkommunikation & Akquise',
-                bio: 'Mit jahrelanger Erfahrung im Vertrieb weiss Anjuli, wie man Kunden gewinnt und bindet. Sie zeigt Ihrem Team, wie KI die Akquise beschleunigt, ohne die persÃ¶nliche Note zu verlieren.'
+                role: 'Expertin für Kundenkommunikation & Akquise',
+                bio: 'Mit jahrelanger Erfahrung im Vertrieb weiss Anjuli, wie man Kunden gewinnt und bindet. Sie zeigt Ihrem Team, wie KI die Akquise beschleunigt, ohne die persönliche Note zu verlieren.',
+                linkedin: 'https://www.linkedin.com/in/anjuli-hertle-a12335179'
               },
               {
                 name: 'Samantha Meyer',
-                role: 'Spezialistin fÃ¸r Zeitplanung & Projektmanagement',
-                bio: 'Samantha bringt Ordnung in komplexe AblÃ¤ufe. Mit ihrer Expertise im Projektmanagement hilft sie Ihnen, KI sinnvoll in Ihre Workflows zu integrieren, sodass messbar mehr Projektzeit entsteht.'
+                role: 'Spezialistin für Zeitplanung & Projektmanagement',
+                bio: 'Samantha bringt Ordnung in komplexe Abläufe. Mit ihrer Expertise im Projektmanagement hilft sie Ihnen, KI sinnvoll in Ihre Workflows zu integrieren, sodass messbar mehr Projektzeit entsteht.',
+                linkedin: 'https://www.linkedin.com/in/samantha-meyer-005b41277'
               }
             ].map((person, index) => (
               <motion.div
@@ -622,7 +624,18 @@ export default function HomePage() {
                 <div className="mb-6">
                   <h3 className="text-2xl font-bold text-primary-blue mb-2">{person.name}</h3>
                   <p className="text-lg italic text-primary-gray mb-4">{person.role}</p>
-                  <p className="text-primary-gray">{person.bio}</p>
+                  <p className="text-primary-gray mb-6">{person.bio}</p>
+                  <a
+                    href={person.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-[#0A66C2] hover:bg-[#004182] text-white font-semibold px-5 py-2.5 rounded-lg transition-colors duration-200"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="white">
+                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                    LinkedIn Profil
+                  </a>
                 </div>
               </motion.div>
             ))}
@@ -639,7 +652,7 @@ export default function HomePage() {
             viewport={{ once: true }}
             className="text-4xl font-bold mb-6"
           >
-            Bereit fÃ¸r den nÃ¤chsten Schritt?
+            Bereit für den nächsten Schritt?
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -648,7 +661,7 @@ export default function HomePage() {
             transition={{ delay: 0.1 }}
             className="text-xl mb-4 opacity-90"
           >
-            Buchen Sie jetzt eine kostenlose 15-minÃ¸tige Beratung. Wir zeigen Ihnen konkret, wie viele Stunden Ihr Team wÃ¶chentlich zurÃ¼ckgewinnen kann und was das fÃ¸r Ihren Umsatz bedeutet.
+            Buchen Sie jetzt eine kostenlose 15-minütige Beratung. Wir zeigen Ihnen konkret, wie viele Stunden Ihr Team wöchentlich zurückgewinnen kann und was das für Ihren Umsatz bedeutet.
           </motion.p>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -683,7 +696,7 @@ export default function HomePage() {
           <div className="grid md:grid-cols-3 gap-8">
             <div>
               <h3 className="text-2xl font-bold mb-4">PraxisNova AI</h3>
-              <p className="opacity-75">KI-Schulungen fÃ¸r Bau und Immobilien</p>
+              <p className="opacity-75">KI-Schulungen für Bau und Immobilien</p>
             </div>
             <div>
               <h4 className="font-bold mb-4">Kontakt</h4>
@@ -703,7 +716,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className="border-t border-white/20 mt-8 pt-8 text-center opacity-75">
-            <p>Â© 2026 PraxisNova AI. Alle Rechte vorbehalten.</p>
+            <p>© 2026 PraxisNova AI. Alle Rechte vorbehalten.</p>
           </div>
         </div>
       </footer>
